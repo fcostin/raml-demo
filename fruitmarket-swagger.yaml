@@ -5,7 +5,7 @@ info:
 schemes:
 - "http"
 paths:
-  /fruit/:
+  /fruit:
     post:
       operationId: "addFruit"
       consumes:
