@@ -1,5 +1,5 @@
 #!/bin/bash
-docker build -f Dockerfile -t oas-raml-converter:dev .
+docker build -f oas-raml-converter.Dockerfile -t oas-raml-converter:dev .
 
 TEMP_CONTAINER_ID=$(docker create oas-raml-converter:dev)
 function cleanup_container {
