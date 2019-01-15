@@ -1,0 +1,80 @@
+swagger: "2.0"
+info:
+  version: "0.0.0"
+  title: "FruitMarket"
+schemes:
+- "http"
+paths:
+  /fruit/:
+    post:
+      operationId: "addFruit"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "fruit"
+        required: true
+        schema:
+          $ref: "#/definitions/Fruit"
+      responses:
+        200:
+          schema:
+            $ref: "#/definitions/Fruit"
+        405:
+          description: "Invalid input"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /fruit:
+    get:
+      operationId: "getFruit"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "fruitID"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          schema:
+            $ref: "#/definitions/Fruit"
+        404:
+          description: "Search proved fruitless"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+
+definitions:
+  Fruit:
+    type: "object"
+    required:
+    - "kind"
+    - "status"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      kind:
+        type: "string"
+        example: "mango"
+      status:
+        type: "string"
+        enum:
+        - "unripe"
+        - "ripe"
+        - "spoiled"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+
